@@ -1,5 +1,6 @@
 import { IoBookOutline, IoNotificationsOutline, IoSearchOutline, IoPersonOutline } from "react-icons/io5";
 import { useState, useEffect, useRef } from "react";
+import { IMAGES } from "../data/images";
 
 /**
  * Header Component
@@ -66,11 +67,11 @@ const Header = ({ onSearch }) => {
         <div className="top-0 left-0 right-0 bg-[#121212] w-full h-fit px-5 py-2 relative flex-1 flex items-center justify-between z-50 border-b border-[#333]">
 
             {/* Icon Container */}
-            {darkLogo && (
+            {IMAGES.LOGO && (
                 <img 
                     className="flex w-[200px] h-12 md:w-[170px]" 
-                    src={darkLogo.image} 
-                    alt={darkLogo.alt} 
+                    src={IMAGES.DARKLOGO} 
+                    alt="Dark mode logo"
                 />
             )}
             

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import useFetchPodcasts from "../utilities/fetchPodcasts";
 import LoadingSpinner from "../utilities/loadingSpinner";
 import ErrorDisplay from "../utilities/loadingError";
+import { IMAGES } from "../data/images";
 
 /**
  * PodcastDetail component which shows detailed information about a selected podcast
@@ -15,6 +16,8 @@ import ErrorDisplay from "../utilities/loadingError";
 const PodcastDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+
+    const Logo = {id: 1, image: IMAGES.LOGO, alt: "logo"};
     
     const [podcastUrl] = useState("https://podcast-api.netlify.app");
     
@@ -148,7 +151,7 @@ const PodcastDetail = () => {
             <div className="flex items-center justify-between p-4 bg-[#181818] rounded-lg hover:bg-[#282828] transition-colors mb-3">
                 <div className="flex items-center space-x-4 flex-1">
                     <img 
-                        src={selectedSeason?.image || podcastData?.image || "/src/assets/SippiCup_logo.png"} 
+                        src={selectedSeason?.image || podcastData?.image || Logo.image} 
                         alt="Episode cover" 
                         className="rounded-md w-12 h-12 object-cover"
                     />
@@ -185,12 +188,11 @@ const PodcastDetail = () => {
         navigate(-1);
     };
 
-    const isLoading = podcastsLoading || isLoadingSeasons;
     const error = podcastsError || seasonsError;
 
-    if (isLoading) {
-        return <LoadingSpinner />;
-    }
+    if (podcastsLoading) {
+    return <LoadingSpinner message="Loading Podcast Details..." />;
+}
 
     if (error) {
         return <ErrorDisplay message={`Failed to load podcast data: ${error}`} />;
@@ -232,7 +234,7 @@ const PodcastDetail = () => {
                 <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
                     {/* Podcast Image */}
                     <img 
-                        src={podcastData.image || "/src/assets/SippiCup_logo.png"} 
+                        src={podcastData.image || IMAGES.LOGO} 
                         alt={podcastData.title} 
                         className="w-full md:w-64 h-64 object-cover rounded-lg shadow-lg"
                     />
@@ -278,7 +280,7 @@ const PodcastDetail = () => {
                 {/* Loading state for seasons */}
                 {isLoadingSeasons && (
                     <div className="text-center py-8">
-                        <div className="text-gray-400">Loading seasons...</div>
+                        <LoadingSpinner message="Loading Selected Podcast Seasons and Episodes..." />
                     </div>
                 )}
 
@@ -321,7 +323,7 @@ const PodcastDetail = () => {
                                 {/* Season Header */}
                                 <div className="flex items-start space-x-4 p-4 bg-[#181818] rounded-lg mb-6">
                                     <img 
-                                        src={selectedSeason.image || podcastData.image || "/src/assets/SippiCup_logo.png"} 
+                                        src={selectedSeason.image || podcastData.image || IMAGES.LOGO} 
                                         alt={`Season ${selectedSeason.season} cover`} 
                                         className="rounded-md w-16 h-16 md:w-20 md:h-20 object-cover"
                                     />
@@ -377,7 +379,7 @@ const PodcastDetail = () => {
                                         >
                                             <div className="flex items-center space-x-3">
                                                 <img 
-                                                    src={season.image || podcastData.image || "/src/assets/SippiCup_logo.png"} 
+                                                    src={season.image || podcastData.image || IMAGES.LOGO} 
                                                     alt={`Season ${season.season} cover`} 
                                                     className="rounded-md w-12 h-12 object-cover"
                                                 />
