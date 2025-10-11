@@ -1,16 +1,29 @@
-# React + Vite
+# DJS05: Show Detail Page with Routing and Navigation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Project Overview
 
-Currently, two official plugins are available:
+In this project, I built a podcast show detail page as part of a larger podcast browsing app. Upon users selecting a show from the homepage or listing page, they  taken to a dedicated page that displays all details about that show. The app supports dynamic routing so each show has its own unique URL.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I implemented data fetching based on the show ID in the URL, handled loading and error states gracefully, and ensured a smooth user experience by preserving search filters and pagination when users navigate back to the homepage. Additionally, I built a season navigation system allowing users to expand or switch between seasons to browse episodes efficiently.
 
-## React Compiler
+This project demonstrates my ability to work with 
+- Dynamic routes, 
+- Manage state across pages, 
+- Handle asynchronous data, and 
+- Create a clean, 
+- Maintainable React codebase.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Core Objectives
+- I Implement dynamic routing for unique show detail pages.
+- I Passed the correct show ID via route parameters and use it to fetch specific show data.
+- I Gracefully handled loading, error, and empty states during data fetching.
+- I Displayed comprehensive show details including title, image, description, genres, and last updated date.
+- I Preserved previous filters and search state when navigating back to the homepage.
+- I Created an intuitive season navigation UI to expand and switch between seasons without excessive scrolling.
+- I Displayed episode information clearly with numbering, titles, images, and shortened descriptions.
+- I Maintained high code quality with documentation (JSDoc) and consistent formatting.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Output
+
+![Details Page](image.png)
