@@ -134,10 +134,15 @@ const Home = () => {
         setCurrentPage(1);
     };
 
+    const clearFilters = () => {
+        setSearchTerm('');
+        setSelectedGenre('all');
+        setCurrentPage(1);
+    };
+
     if (isLoading) {
         return <LoadingSpinner />;
     }
-    
     
     return (
         <>
@@ -153,8 +158,10 @@ const Home = () => {
                 )}
             
                 <div className="w-full flex flex-col gap-8">
-                    {/* Render error or grid for all podcasts */}
-                    {allPodcasts && allPodcasts.length > 0 ? (
+                    {/* Initial state - no podcasts at all */}
+                    {!allPodcasts || allPodcasts.length === 0 ? (
+                        <p className="text-gray-400">No podcasts found</p>
+                    ) : (
                         <div>
                             <h2 className="font-bold text-2xl mb-2">
                                 {searchTerm ? `Search Results for "${searchTerm}"` : 'Podcasts'}
@@ -171,40 +178,43 @@ const Home = () => {
                                 <Sorter onSortChange={handleSortChange} />
                             </div>
 
-                            {/* Handling empty results */}
-                            {searchTerm && filteredAndSortedPodcasts.length === 0 && (
-                                    <div className="text-center py-8">
-                                        <p className="text-gray-400 text-lg">
-                                            No podcasts found matching "<span className="text-white">{searchTerm}</span>"
-                                        </p>
+                            {/* No results after filtering/searching */}
+                            {filteredAndSortedPodcasts.length === 0 ? (
+                                <div className="text-center py-8">
+                                    <p className="text-gray-400 text-lg mb-4">
+                                        No podcasts found
+                                        {searchTerm && ` matching "${searchTerm}"`}
+                                        {selectedGenre !== 'all' && ` in selected genre`}
+                                    </p>
+                                    {(searchTerm || selectedGenre !== 'all') && (
                                         <button 
-                                            onClick={clearSearch}
+                                            onClick={clearFilters}
                                             className="mt-2 text-[#9A7B4F] hover:text-[#b3b3b3] transition-colors"
                                         >
-                                            Clear search
+                                            Clear all filters
                                         </button>
-                                    </div>
-                                )}
+                                    )}
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Podcast Grid */}
+                                    <PodcastGrid 
+                                        podcasts={paginationData.currentCards} 
+                                    />
 
-                            {/* Podcast Grid */}
-                            <PodcastGrid 
-                                podcasts={paginationData.currentCards} 
-                            />
-
-                            {/* Pagination Component */}
-                            {paginationData.totalPages > 1 && (
-                                <Pagination 
-                                    currentPage={paginationData.currentPage}
-                                    totalPages={paginationData.totalPages}
-                                    totalPosts={paginationData.totalPodcasts}
-                                    postsPerPage={postsPerPage}
-                                    onPageChange={handlePageChange}
-                                />
+                                    {/* Pagination Component */}
+                                    {paginationData.totalPages > 1 && (
+                                        <Pagination 
+                                            currentPage={paginationData.currentPage}
+                                            totalPages={paginationData.totalPages}
+                                            totalPosts={paginationData.totalPodcasts}
+                                            postsPerPage={postsPerPage}
+                                            onPageChange={handlePageChange}
+                                        />
+                                    )}
+                                </>
                             )}
-
                         </div>
-                    ) : (
-                        <p className="text-gray-400">No podcasts found</p>
                     )}
                 </div>
             </div>
