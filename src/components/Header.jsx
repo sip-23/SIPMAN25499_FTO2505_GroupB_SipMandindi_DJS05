@@ -8,8 +8,8 @@ import { IMAGES } from "../data/images";
  * A fixed top navigation bar
  * @component
  */
-const Header = ({ onSearch }) => {
-    const [searchValue, setSearchValue] = useState("");
+const Header = ({ onSearch, searchTerm }) => {
+    const [searchValue, setSearchValue] = useState(searchTerm || "");
     const searchTimeoutRef = useRef(null);
     const searchInputRef = useRef(null);
 
@@ -45,7 +45,7 @@ const Header = ({ onSearch }) => {
         }
     }
 
-    const clearSearch  = () => {
+    const clearSearch = () => {
         setSearchValue("");
         if (searchTimeoutRef.current) {
             clearTimeout(searchTimeoutRef.current);
@@ -54,6 +54,10 @@ const Header = ({ onSearch }) => {
             onSearch("");
         }
     };
+
+    useEffect(() => {
+        setSearchValue(searchTerm || "");
+    }, [searchTerm]);
 
     useEffect(() => {
         return () => {

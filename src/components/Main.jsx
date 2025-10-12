@@ -147,7 +147,7 @@ const Home = () => {
     return (
         <>
             {/* Header */}
-            <Header onSearch={handleSearch} />
+            <Header onSearch={handleSearch} searchTerm={searchTerm} />
 
             <div className="text-white px-12 py-6 flex w-full gap-5">
                 {/* Error Display */}
