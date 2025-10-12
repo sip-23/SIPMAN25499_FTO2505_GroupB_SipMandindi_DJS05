@@ -23,7 +23,22 @@ This project demonstrates my ability to work with
 - I Displayed episode information clearly with numbering, titles, images, and shortened descriptions.
 - I Maintained high code quality with documentation (JSDoc) and consistent formatting.
 
+### How to run this Project
+After Forking, Cloning, or Downloading and Saving this file on your local machine, Follow the below instructions.
+
+1. Open the project on your Code editor
+2. Open your Terminal
+3. Ensure you also Install React Router DOM
+    - `npm install react-router-dom`
+3. Ensure you also Install React Icons
+    - `npm install react-icons`
+5. Run this to Scaffold you React App.
+    - `npm run dev`
+    - Press "Enter + h"
+    - Press "Enter + o"
 
 ### Output
 
-![Details Page](image.png)
+![Podcast Home Page](image-1.png)
+
+![Podcast Details Page](image.png)
